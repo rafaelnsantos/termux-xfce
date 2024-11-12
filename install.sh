@@ -52,7 +52,7 @@ wget https://github.com/rafaelnsantos/termux-xfce/raw/main/utils.sh
 chmod +x *.sh
 
 ./xfce.sh "$username"
-/utils.sh
+./utils.sh
 
 source $PREFIX/etc/bash.bashrc
 termux-reload-settings

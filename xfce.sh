@@ -67,3 +67,9 @@ mv fancybash.sh .fancybash.sh
 echo "source $HOME/.fancybash.sh" >> $PREFIX/etc/bash.bashrc
 sed -i "326s/\\\u/$username/" $HOME/.fancybash.sh
 sed -i "327s/\\\h/termux/" $HOME/.fancybash.sh
+
+
+# Config
+wget https://github.com/rafaelnsantos/termux-xfce/raw/main/config.tar.gz
+tar -xvzf config.tar.gz
+rm config.tar.gz

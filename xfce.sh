@@ -2,7 +2,7 @@
 
 username="$1"
 
-pkgs=('git' 'neofetch' 'virglrenderer-android' 'papirus-icon-theme' 'xfce4' 'xfce4-goodies' 'eza' 'pavucontrol-qt' 'bat' 'jq' 'nala' 'wmctrl' 'firefox' 'netcat-openbsd' 'termux-x11-nightly' 'eza')
+pkgs=('git' 'neofetch' 'virglrenderer-android' 'papirus-icon-theme' 'xfce4' 'eza' 'bat' 'nala' 'firefox' 'termux-x11-nightly')
 
 #Install xfce4 desktop and additional packages
 pkg install "${pkgs[@]}" -y -o Dpkg::Options::="--force-confold"
@@ -13,9 +13,6 @@ chmod +x $HOME/Desktop/firefox.desktop
 
 #Set aliases
 echo "
-alias debian='proot-distro login debian --user $username --shared-tmp'
-#alias zrun='proot-distro login debian --user $username --shared-tmp -- env DISPLAY=:1.0 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform '
-#alias zrunhud='proot-distro login debian --user $username --shared-tmp -- env DISPLAY=:1.0 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform GALLIUM_HUD=fps '
 alias hud='GALLIUM_HUD=fps '
 alias ls='eza -lF --icons'
 alias cat='bat '
@@ -26,12 +23,6 @@ alias search='nala search '
 alias list='nala list --upgradeable'
 alias show='nala show'
 " >> $PREFIX/etc/bash.bashrc
-
-#Download Wallpaper
-wget https://raw.githubusercontent.com/phoenixbyrd/Termux_XFCE/main/peakpx.jpg
-wget https://raw.githubusercontent.com/phoenixbyrd/Termux_XFCE/main/dark_waves.png
-mv peakpx.jpg $PREFIX/share/backgrounds/xfce/
-mv dark_waves.png $PREFIX/share/backgrounds/xfce/
 
 #Install WhiteSur-Dark Theme
 wget https://github.com/vinceliuice/WhiteSur-gtk-theme/archive/refs/tags/2023-04-26.zip
@@ -64,22 +55,15 @@ rm Meslo.zip
 rm LICENSE.txt
 rm readme.md
 
-wget https://github.com/phoenixbyrd/Termux_XFCE/raw/main/NotoColorEmoji-Regular.ttf
+wget https://github.com/rafaelnsantos/termux-xfce/raw/main/NotoColorEmoji-Regular.ttf
 mv NotoColorEmoji-Regular.ttf .fonts
 
-wget https://github.com/phoenixbyrd/Termux_XFCE/raw/main/font.ttf
+wget https://github.com/rafaelnsantos/termux-xfce/raw/main/font.ttf
 mv font.ttf .termux/font.ttf
 
 #Setup Fancybash Termux
-wget https://raw.githubusercontent.com/phoenixbyrd/Termux_XFCE/main/fancybash.sh
+wget https://raw.githubusercontent.com/rafaelnsantos/termux-xfce/main/fancybash.sh
 mv fancybash.sh .fancybash.sh
 echo "source $HOME/.fancybash.sh" >> $PREFIX/etc/bash.bashrc
 sed -i "326s/\\\u/$username/" $HOME/.fancybash.sh
 sed -i "327s/\\\h/termux/" $HOME/.fancybash.sh
-
-#Autostart Conky and Flameshot
-wget https://github.com/phoenixbyrd/Termux_XFCE/raw/main/config.tar.gz
-tar -xvzf config.tar.gz
-rm config.tar.gz
-chmod +x .config/autostart/conky.desktop
-chmod +x .config/autostart/org.flameshot.Flameshot.desktop

@@ -18,9 +18,9 @@ trap finish EXIT
 clear
 
 echo ""
-echo "This script will install XFCE Desktop in Termux along with a Debian proot"
+echo "This script will install XFCE Desktop in Termux"
 echo ""
-read -r -p "Please enter username for proot installation: " username </dev/tty
+read -r -p "Please enter username: " username </dev/tty
 
 termux-change-repo
 pkg update -y -o Dpkg::Options::="--force-confold"
@@ -36,7 +36,7 @@ echo ""
 read -n 1 -s -r -p "Press any key to continue..."
 termux-setup-storage
 
-pkgs=('wget' 'ncurses-utils' 'dbus' 'proot-distro' 'x11-repo' 'tur-repo' 'pulseaudio')
+pkgs=('wget' 'ncurses-utils' 'dbus' 'x11-repo' 'tur-repo' 'pulseaudio')
 
 pkg uninstall dbus -y
 pkg update
@@ -47,25 +47,12 @@ mkdir -p Desktop
 mkdir -p Downloads
 
 #Download required install scripts
-wget https://github.com/phoenixbyrd/Termux_XFCE/raw/main/xfce.sh
-wget https://github.com/phoenixbyrd/Termux_XFCE/raw/main/proot.sh
-wget https://github.com/phoenixbyrd/Termux_XFCE/raw/main/utils.sh
+wget https://github.com/rafaelnsantos/termux-xfce/raw/main/xfce.sh
+wget https://github.com/rafaelnsantos/termux-xfce/raw/main/utils.sh
 chmod +x *.sh
 
 ./xfce.sh "$username"
-./proot.sh "$username"
-./utils.sh
-
-# Display a message 
-clear -x
-echo ""
-echo "Installing Termux-X11 APK" 
-# Wait for a single character input 
-echo ""
-read -n 1 -s -r -p "Press any key to continue..."
-wget https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
-mv app-arm64-v8a-debug.apk $HOME/storage/downloads/
-termux-open $HOME/storage/downloads/app-arm64-v8a-debug.apk
+/utils.sh
 
 source $PREFIX/etc/bash.bashrc
 termux-reload-settings
@@ -86,6 +73,5 @@ echo ""
 echo ""
 
 rm xfce.sh
-rm proot.sh
 rm utils.sh
 rm install.sh

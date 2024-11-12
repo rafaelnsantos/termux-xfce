@@ -13,5 +13,4 @@ mv kill_termux_x11 $PREFIX/bin
 #Create kill_termux_x11.desktop
 wget https://raw.githubusercontent.com/rafaelnsantos/termux-xfce/main/files/kill_termux_x11.desktop
 chmod +x kill_termux_x11.desktop
-mv kill_termux_x11.desktop $HOME/Desktop
-cp $HOME/Desktop/kill_termux_x11.desktop $PREFIX/share/applications
+mv kill_termux_x11.desktop $PREFIX/share/applications

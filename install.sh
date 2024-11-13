@@ -22,11 +22,6 @@ echo "This script will install XFCE Desktop in Termux"
 echo ""
 read -r -p "Please enter username: " username </dev/tty
 
-termux-change-repo
-pkg update -y -o Dpkg::Options::="--force-confold"
-pkg upgrade -y -o Dpkg::Options::="--force-confold"
-sed -i '12s/^#//' $HOME/.termux/termux.properties
-
 # Display a message 
 clear -x
 echo ""
@@ -35,6 +30,11 @@ echo "Setting up Termux Storage access."
 echo ""
 termux-setup-storage
 read -n 1 -s -r -p "Press any key to continue..."
+
+termux-change-repo
+pkg update -y -o Dpkg::Options::="--force-confold"
+pkg upgrade -y -o Dpkg::Options::="--force-confold"
+sed -i '12s/^#//' $HOME/.termux/termux.properties
 
 pkgs=('wget' 'unzip' 'x11-repo' 'tur-repo')
 

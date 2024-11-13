@@ -33,12 +33,11 @@ echo ""
 echo "Setting up Termux Storage access." 
 # Wait for a single character input 
 echo ""
-read -n 1 -s -r -p "Press any key to continue..."
 termux-setup-storage
+read -n 1 -s -r -p "Press any key to continue..."
 
-pkgs=('wget' 'ncurses-utils' 'dbus' 'x11-repo' 'tur-repo' 'pulseaudio')
+pkgs=('wget' 'unzip' 'x11-repo' 'tur-repo')
 
-pkg uninstall dbus -y
 pkg update
 pkg install "${pkgs[@]}" -y -o Dpkg::Options::="--force-confold"
 
@@ -46,12 +45,18 @@ pkg install "${pkgs[@]}" -y -o Dpkg::Options::="--force-confold"
 mkdir -p Desktop
 mkdir -p Downloads
 
-#Download required install scripts
-wget https://github.com/rafaelnsantos/termux-xfce/raw/main/xfce.sh
-wget https://github.com/rafaelnsantos/termux-xfce/raw/main/utils.sh
+#Download repository
+wget https://github.com/rafaelnsantos/termux-xfce/archive/refs/heads/main.zip
+
+unzip main.zip
+
+cd termux-xfce-main
+
 chmod +x *.sh
 
 ./xfce.sh "$username"
+./extras.sh
+./theme.sh "$username"
 ./utils.sh
 
 source $PREFIX/etc/bash.bashrc
@@ -72,6 +77,8 @@ echo "Enjoy your Termux XFCE4 Desktop experience!"
 echo ""
 echo ""
 
-rm xfce.sh
-rm utils.sh
+#Cleanup
+cd
+rm main.zip
+rm -rf termux-xfce-main
 rm install.sh

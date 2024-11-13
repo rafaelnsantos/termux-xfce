@@ -1,4 +1,6 @@
-pkgs=('git' 'neofetch' 'vim' 'openttd' 'eza' 'bat' 'nala' 'firefox')
+#!/bin/bash
+
+pkgs=('git' 'neofetch' 'vim' 'openttd' 'eza' 'bat' 'nala' 'firefox' 'ncurses-utils')
 
 #Install xfce4 desktop and additional packages
 pkg install "${pkgs[@]}" -y -o Dpkg::Options::="--force-confold"

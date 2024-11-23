@@ -41,4 +41,4 @@ sed -i "326s/\\\u/$username/" $HOME/.fancybash.sh
 sed -i "327s/\\\h/termux/" $HOME/.fancybash.sh
 
 # Config
-cp -r config $HOME/.config
+mv config $HOME/.config

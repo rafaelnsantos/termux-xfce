@@ -55,6 +55,7 @@ cd termux-xfce-main
 chmod +x *.sh
 
 ./xfce.sh
+./proot.sh "$username"
 ./extras.sh
 ./theme.sh "$username"
 ./utils.sh

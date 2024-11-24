@@ -1,0 +1,3 @@
+#!/bin/bash
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/*)
+pd login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 GALLIUM_HUD=fps $@
